@@ -1,0 +1,8 @@
+%relative order
+:- solution(I, A), solution(J, B), p(I, C), p(J, D), A > B, C < D.
+%subsequence 
+:- solution(I, A), solution(J, B), t(I2, A), t(J2, B), I > J, I2 < J2.
+% nr duplicates
+:- solution(I, A), solution(J, A), I <> J.      
+% index duplicates
+:- solution(I, A), solution(I, B), A <> B.      

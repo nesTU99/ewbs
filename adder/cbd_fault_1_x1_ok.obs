@@ -1,0 +1,3 @@
+% measurement shows that Adder 1 - x1 is not defect
+
+out(1, x1, 0).

@@ -1,0 +1,2 @@
+:- s_out(A,X), s_out(A,Y), X < Y.
+:- c_out(A,X), c_out(A,Y), X < Y.

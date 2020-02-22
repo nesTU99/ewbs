@@ -1,0 +1,10 @@
+#maxint=8.
+
+
+offset(X) :- p(X,_).
+value(Y) :- t(_,Y).
+
+solution(X,Y) v notSolution(X,Y):- offset(X), value(Y).
+
+:- #count{X,Y : solution(X,Y)} < Counter, patternlength(Counter).
+:- #count{X,Y : solution(X,Y)} > Counter, patternlength(Counter).

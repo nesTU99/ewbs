@@ -1,0 +1,13 @@
+s_out(0,0).
+s_out(1,0).
+c_out(1,1).
+
+
+%NAND
+out(0,a1,0). 
+
+out(1,a1,0).
+
+% NAND
+out(1,a2,1). 
+

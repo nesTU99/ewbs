@@ -1,0 +1,94 @@
+% successor
+%   succ(A1,A2)
+
+% gates
+%   and(Gate)
+%   or(Gate)
+%   xor(Gate)
+
+% Inputs
+%   in1(Adder, Gate, Value)
+%   in2(Adder, Gate, Value)
+
+% Outputs
+%   out(Adder, Gate, Value)
+
+% Input signal for one adder
+%   a_in(Adder, Value)
+%   b_in(Adder, Value)
+%   c_in(Adder, Value)
+
+% Output signal for one adder
+%   s_out(Adder, Value)
+%   c_out(Adder, Value)
+
+% components
+% --------------------
+xor(x1). 
+xor(x2).
+and(a1). 
+and(a2).
+or(o1).
+
+% gate AND
+% --------------
+out(A, G, 1) :- and(G), in1(A, G, 1), in2(A, G, 1), not ab(A, G).
+out(A, G, 0) :- and(G), in1(A, G, 1), in2(A, G, 0), not ab(A, G).
+out(A, G, 0) :- and(G), in1(A, G, 0), in2(A, G, 1), not ab(A, G).
+out(A, G, 0) :- and(G), in1(A, G, 0), in2(A, G, 0), not ab(A, G).
+
+% gate OR
+% ------------
+out(A, G, 1) :- or(G), in1(A, G, 1), in2(A, G, 1), not ab(A, G).
+out(A, G, 1) :- or(G), in1(A, G, 0), in2(A, G, 1), not ab(A, G).
+out(A, G, 1) :- or(G), in1(A, G, 1), in2(A, G, 0), not ab(A, G).
+out(A, G, 0) :- or(G), in1(A, G, 0), in2(A, G, 0), not ab(A, G).
+
+% gate XOR
+% -------------
+out(A, G, 1) :- xor(G), in1(A, G, 0), in2(A, G, 1), not ab(A, G).
+out(A, G, 1) :- xor(G), in1(A, G, 1), in2(A, G, 0), not ab(A, G).
+out(A, G, 0) :- xor(G), in1(A, G, 1), in2(A, G, 1), not ab(A, G).
+out(A, G, 0) :- xor(G), in1(A, G, 0), in2(A, G, 0), not ab(A, G).
+
+
+% connect inputs
+% ---------------------
+a_in(A, V) :- num1(A, V), c_in(A,_).
+b_in(A, V) :- num2(A, V), c_in(A,_).
+
+% connect Adders
+% ---------------------
+succ(A1,A2) :- adder(A1), adder(A2), A1 != A2, #succ(A1,A2).
+c_in(A2,A1_OUT) :- succ(A1,A2), c_out(A1,A1_OUT).
+
+% x1
+in1(A, x1, A_IN) :- a_in(A, A_IN).
+in2(A, x1, B_IN) :- b_in(A, B_IN).
+
+% x2
+in1(A,x2, OUT_X1) :- out(A, x1, OUT_X1).
+in2(A,x2, C_IN)   :- c_in(A ,C_IN).
+
+% a1
+in1(A, a1, OUT_X1) :- out(A, x1, OUT_X1).
+in2(A, a1, C_IN)   :- c_in(A, C_IN).
+
+% a2
+in1(A, a2, A_IN) :- a_in(A, A_IN).
+in2(A, a2, B_IN) :- b_in(A, B_IN).
+
+% o1
+in1(A, o1, OUT_A1) :- out(A, a1, OUT_A1).
+in2(A, o1, OUT_A2) :- out(A, a2, OUT_A2).
+
+% s-out
+s_out(A, OUT_X2) :- out(A, x2,OUT_X2).
+
+% c-out
+c_out(A, OUT_O1) :- out(A, o1, OUT_O1).
+
+% domain constraints
+%:- in1(A, G, V1), in1(A, G, V2), V1 != V2.
+%:- in2(A, G, V1), in2(A, G, V2), V1 != V2.
+%:- out(A, G, V1), out(A, G, V2), V1 != V2.

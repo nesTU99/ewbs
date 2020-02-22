@@ -1,0 +1,2 @@
+adder(0).
+adder(B) :- adder(A), #succ(A,B), B< #count{I : num1(I,_)}.

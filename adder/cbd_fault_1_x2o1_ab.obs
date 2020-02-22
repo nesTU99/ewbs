@@ -1,0 +1,6 @@
+% measurement shows that adder 1 x2 and o1 are defect. 
+
+out(1, x1, 0).
+out(0, o1, 1).
+out(1, a1, 0).
+out(1, a2, 0).

@@ -1,0 +1,11 @@
+pick_index(X) :- p(X,_).
+pick_nr(Y) :- t(_,Y).
+solution(X,Y) v trash(X,Y) :- pick_nr(Y), pick_index(X).
+
+% countUniqueIndex(X) :- X=#count{I : solution(I,W)}, #int(X).
+% :- countUniqueIndex(C1), patternlength(C2), C1<C2.
+
+% Keep only Sets with exactly C solutions
+:- #count{X,Y : solution(X,Y)} > C, patternlength(C).
+:- #count{X,Y : solution(X,Y)} < C, patternlength(C).
+

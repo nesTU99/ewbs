@@ -1,0 +1,9 @@
+emp(1,goofie,1250).
+emp(2,willy,700).
+emp(3,woody,750).
+emp(4,jerry,900).
+emp(5,tom,1050).
+
+over1000(I,S) :- emp(I,N,S), S > 1000.
+over1000nr(X) :- #count{I : emp(I,W,S),S>1000} = X.
+          

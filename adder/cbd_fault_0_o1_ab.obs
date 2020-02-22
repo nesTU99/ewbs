@@ -1,0 +1,4 @@
+% measurement shows that Adder 0 - o1 is defect. 
+out(1, x1, 0).
+out(0, a1, 1).
+out(0, a2, 0).
